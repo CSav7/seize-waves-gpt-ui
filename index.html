@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Seize Waves AI Chat</title>
+</head>
+<body>
+  <h2>Seize Waves AI Chat</h2>
+  <textarea id="userInput" rows="4" cols="50" placeholder="Type your question..."></textarea><br>
+  <button onclick="sendMessage()">Send</button>
+  <p><strong>Response:</strong></p>
+  <div id="response"></div>
+
+  <script>
+    async function sendMessage() {
+      const userInput = document.getElementById('userInput').value;
+
+      const response = await fetch('http://localhost:3000/api/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ message: userInput })
+      });
+
+      const data = await response.json();
+      document.getElementById('response').innerText = data.reply;
+    }
+  </script>
+</body>
+</html>
+
